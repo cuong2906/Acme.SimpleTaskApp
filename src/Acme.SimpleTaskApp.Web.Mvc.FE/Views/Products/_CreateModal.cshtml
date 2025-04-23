@@ -1,0 +1,60 @@
+﻿@using Acme.SimpleTaskApp.Products.Dto
+@model Acme.SimpleTaskApp.Web.Models.Products.IndexViewModel
+@{
+    Layout = null;
+}
+
+
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form name="productCreateForm" role="form" class="form-horizontal">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span>@L("CreateNewProduct")</span>
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label" for="name">@L("Name")</label>
+                        <div class="col-md-9">
+                            <input id="name" type="text" class="form-control" name="Name" required maxlength="128">
+                        </div>
+                    </div>
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label" for="price">@L("Price")</label>
+                        <div class="col-md-9">
+                            <input id="price" type="number" class="form-control" name="Price" required min="0">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="image">@L("Image")</label>
+                        <div class="col-md-9">
+                            <input id="image" type="file" class="form-control" name="ImageUrl" accept="image/*">
+                            <img id="imagePreview" src="#" alt="Preview" style="max-width: 200px; margin-top: 10px; display: none;" />
+                        </div>
+                    </div>
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label" for="categoryId">@L("Category")</label>
+                        <div class="col-md-9">
+                            <select id="categoryId" class="form-control" name="CategoryId" required>
+                                <option value="">@L("SelectACategory")</option>
+                                @foreach (var category in Model.Categories)
+                                {
+                                    <option value="@category.Value">@category.Text</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@L("Cancel")</button>
+                    <button type="submit" class="btn btn-primary save-button">@L("Save")</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="en">
+  <texts>
+    <!-- Common Navigation -->
+    <text name="HomePage" value="Home page" />
+    <text name="About" value="About" />
+    <text name="Administration" value="Administration" />
+    <text name="Back" value="Back" />
+    <text name="Clear" value="Clear" />
+    <text name="Create" value="Create" />
+    <text name="Edit" value="Edit" />
+    <text name="Delete" value="Delete" />
+    <text name="Save" value="Save" />
+    <text name="Cancel" value="Cancel" />
+    <text name="Search" value="Search" />
+    <text name="Refresh" value="Refresh" />
+    <text name="Actions" value="Actions" />
+    <text name="All" value="All" />
+    <text name="Filter" value="Filter" />
+    <text name="Settings" value="Settings" />
+    <text name="Optional" value="Optional" />
+    <text name="Yes" value="Yes" />
+    <text name="No" value="No" />
+
+    <!-- Welcome & General Messages -->
+    <text name="WelcomeMessage" value="Welcome to SimpleTaskApp!" />
+    <text name="FormIsNotValidMessage" value="Form is not valid. Please check and fix errors." />
+    <text name="SavedSuccessfully" value="Saved successfully" />
+    <text name="SuccessfullyDeleted" value="Successfully deleted" />
+    <text name="StartTyping" value="Start Typing" />
+    <text name="PleaseWait" value="Please wait..." />
+    <text name="ThisFieldIsRequired" value="This field is required" />
+    <text name="TotalRecordsCount" value="Total: {0}" />
+
+    <!-- Authentication & User Management -->
+    <text name="LogIn" value="Log in" />
+    <text name="Logout" value="Logout" />
+    <text name="Register" value="Register" />
+    <text name="OrLoginWith" value="Or login with" />
+    <text name="LoginFailed" value="Login failed!" />
+    <text name="InvalidUserNameOrPassword" value="Invalid user name or password" />
+    <text name="UserNameOrEmail" value="User name or email" />
+    <text name="Password" value="Password" />
+    <text name="RememberMe" value="Remember me" />
+    <text name="PleaseEnterLoginInformation" value="Please enter login information" />
+    <text name="ResetPassword" value="Reset Password" />
+    <text name="UpdatePassword" value="Update Password" />
+    <text name="CurrentPassword" value="Current Password" />
+    <text name="NewPassword" value="New Password" />
+    <text name="ConfirmNewPassword" value="Confirm New Password" />
+    <text name="PasswordsDoNotMatch" value="Passwords do not match" />
+    <text name="PasswordsMustBeAtLeast8CharactersContainLowercaseUppercaseNumber" value="Passwords must be at least 8 characters, contain a lowercase, uppercase, and number" />
+    <text name="UserEmailIsNotConfirmedAndCanNotLogin" value="Your email address is not confirmed. You can not login." />
+    <text name="UserLockedOutMessage" value="The user account has been locked out. Please try again later." />
+    <text name="WaitingForEmailActivation" value="Your email address should be activated" />
+    <text name="WaitingForActivationMessage" value="Your account is waiting to be activated by system admin." />
+    <text name="SuccessfullyRegistered" value="Successfully registered" />
+
+    <!-- User Profile -->
+    <text name="UserName" value="User name" />
+    <text name="Name" value="Name" />
+    <text name="Surname" value="Surname" />
+    <text name="NameSurname" value="Name surname" />
+    <text name="EmailAddress" value="Email address" />
+    <text name="FullName" value="Full name" />
+    <text name="UserDetails" value="User details" />
+    <text name="UserRoles" value="User roles" />
+    <text name="IsActive" value="Is active" />
+    <text name="Users" value="Users" />
+    <text name="CreateNewUser" value="Create new user" />
+    <text name="EditUser" value="Edit user" />
+    <text name="UserDeleteWarningMessage" value="User {0} will be deleted." />
+
+    <!-- Roles -->
+    <text name="Roles" value="Roles" />
+    <text name="RoleName" value="Role Name" />
+    <text name="DisplayName" value="Display Name" />
+    <text name="RoleDescription" value="Role description" />
+    <text name="CreateNewRole" value="Create new role" />
+    <text name="EditRole" value="Edit role" />
+    <text name="RoleDeleteWarningMessage" value="Role {0} will be deleted and unassigned from all assigned users." />
+
+    <!-- Tenants -->
+    <text name="Tenants" value="Tenants" />
+    <text name="CreateNewTenant" value="Create new tenant" />
+    <text name="TenancyName" value="Tenancy name" />
+    <text name="TenantName_Regex_Description" value="Tenant name must be at least 2 chars, starts with a letter and continue with letter, number, dash or underscore." />
+    <text name="DefaultPasswordIs" value="Default password is {0}" />
+    <text name="AdminEmailAddress" value="Admin email address" />
+    <text name="AdminPassword" value="Admin password" />
+    <text name="LeaveEmptyToSwitchToHost" value="Leave empty to switch to the host" />
+    <text name="CurrentTenant" value="Current tenant" />
+    <text name="NotSelected" value="Not selected" />
+    <text name="Change" value="Change" />
+    <text name="ChangeTenant" value="Change tenant" />
+    <text name="TenantSelection" value="Tenant Selection" />
+    <text name="TenantSelection_Detail" value="Please select one of the following tenants." />
+    <text name="TenantDeleteWarningMessage" value="Tenant {0} will be deleted." />
+    <text name="DatabaseConnectionString" value="Database connection string" />
+
+    <!-- Products -->
+    <text name="Products" value="Products" />
+    <text name="Product" value="Product" />
+    <text name="CreateNewProduct" value="Create new product" />
+    <text name="EditProduct" value="Edit product" />
+    <text name="Price" value="Price" />
+    <text name="ImageUrl" value="Image" />
+    <text name="Image" value="Image" />
+    <text name="ProductName" value="Product Name" />
+    <text name="UnitPrice" value="Unit Price" />
+    <text name="Quantity" value="Quantity" />
+
+    <!-- Categories -->
+    <text name="Categories" value="Categories" />
+    <text name="CategoryName" value="Category Name" />
+    <text name="CategoriesName" value="Categories Name" />
+
+    <!-- Orders -->
+    <text name="Orders" value="Orders" />
+    <text name="Order" value="Order" />
+    <text name="OrderId" value="Order ID" />
+    <text name="OrderStatus" value="Order Status" />
+    <text name="OrderDate" value="Order Date" />
+    <text name="OrderTotal" value="Order Total" />
+    <text name="OrderDetails" value="Order Details" />
+    <text name="OrderItems" value="Order Items" />
+    <text name="CreateNewOrder" value="Create new order" />
+    <text name="EditOrder" value="Edit order" />
+    <text name="DeleteOrder" value="Delete order" />
+    <text name="ViewOrder" value="View order" />
+    <text name="Status" value="Status" />
+    <text name="Total" value="Total" />
+    <text name="SubTotal" value="Subtotal" />
+    <text name="Note" value="Note" />
+
+    <!-- Order Statuses -->
+    <text name="Pending" value="Pending" />
+    <text name="Processing" value="Processing" />
+    <text name="Shipped" value="Shipped" />
+    <text name="Delivered" value="Delivered" />
+    <text name="Cancelled" value="Cancelled" />
+
+    <!-- Shopping Cart -->
+    <text name="Cart" value="Cart" />
+    <text name="ShoppingCart" value="Shopping Cart" />
+    <text name="CartSummary" value="Cart Summary" />
+    <text name="CartItems" value="Cart Items" />
+    <text name="CartTotal" value="Cart Total" />
+    <text name="CartIsEmpty" value="Your cart is empty" />
+    <text name="ViewCart" value="View Cart" />
+    <text name="AddToCart" value="Add to Cart" />
+    <text name="UpdateCart" value="Update Cart" />
+    <text name="RemoveFromCart" value="Remove from Cart" />
+    <text name="ClearCart" value="Clear Cart" />
+    <text name="Checkout" value="Checkout" />
+    <text name="ContinueShopping" value="Continue Shopping" />
+
+    <!-- Customer Information -->
+    <text name="CustomerInfo" value="Customer Information" />
+    <text name="CustomerName" value="Customer Name" />
+    <text name="UserEmail" value="Email" />
+    <text name="UserPhone" value="Phone" />
+    <text name="ShippingAddress" value="Shipping Address" />
+
+    <!-- Messages -->
+    <text name="OrderSuccessMessage" value="Your order has been placed successfully!" />
+    <text name="CartUpdateSuccess" value="Cart updated successfully" />
+    <text name="ItemRemovedFromCart" value="Item removed from cart" />
+    <text name="ConfirmRemoveItem" value="Are you sure you want to remove this item?" />
+    <text name="ConfirmClearCart" value="Are you sure you want to clear your cart?" />
+    <text name="ConfirmDeleteOrder" value="Are you sure you want to delete this order?" />
+
+    <!-- Tasks -->
+    <text name="Tasks" value="Tasks" />
+
+    <!-- Error Pages -->
+    <text name="403PageHeader" value="Forbidden" />
+    <text name="403PageDescription" value="You don't have permission to access this resource. Please contact your administrator." />
+    <text name="403PageButton" value="Go back to Dashboard" />
+
+    <!-- Validation Messages -->
+    <text name="PleaseEnterAtLeastNCharacter" value="Please enter at least {0} characters" />
+    <text name="PleaseEnterNoMoreThanNCharacter" value="Please enter no more than {0} characters" />
+    <text name="InvalidEmailAddress" value="Invalid email address" />
+    <text name="InvalidPattern" value="Invalid" />
+    <text name="PairsDoNotMatch" value="Do not match" />
+
+    <!-- Dates -->
+    <text name="CreationTime" value="Creation Time" />
+    <text name="UpdateTime" value="Update Time" />
+
+  </texts>
+</localizationDictionary>

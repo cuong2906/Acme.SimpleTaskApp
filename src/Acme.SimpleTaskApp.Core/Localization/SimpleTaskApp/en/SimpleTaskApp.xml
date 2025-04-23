@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="en">
+  <texts>
+    <text name="HomePage">Home</text>
+    <text name="Orders">Orders</text>
+    <text name="CreateNewOrder">Create New Order</text>
+    <text name="EditOrder">Edit Order</text>
+    <text name="DeleteOrder">Delete Order</text>
+    <text name="ViewOrder">View Order</text>
+    <text name="Cart">Cart</text>
+    <text name="ViewCart">View Cart</text>
+    <text name="AddToCart">Add To Cart</text>
+    <text name="UpdateCart">Update Cart</text>
+    <text name="RemoveFromCart">Remove From Cart</text>
+    <text name="Checkout">Checkout</text>
+    <text name="OrderId">Order ID</text>
+    <text name="CustomerName">Customer Name</text>
+    <text name="TotalAmount">Total Amount</text>
+    <text name="Status">Status</text>
+    <text name="CreationTime">Creation Time</text>
+    <text name="Actions">Actions</text>
+    <text name="Edit">Edit</text>
+    <text name="Delete">Delete</text>
+    <text name="Refresh">Refresh</text>
+    <text name="AreYouSureToDeleteTheOrder">Are you sure to delete the order '{0}'?</text>
+    <text name="Pending">Pending</text>
+    <text name="Processing">Processing</text>
+    <text name="Shipped">Shipped</text>
+    <text name="Delivered">Delivered</text>
+    <text name="Cancelled">Cancelled</text>
+    <text name="SearchOrders">Search Orders</text>
+    <text name="AllStatuses">All Statuses</text>
+    <text name="Note">Note</text>
+    <text name="UserEmail">User Email</text>
+    <text name="UserPhone">User Phone</text>
+    <text name="ShippingAddress">Shipping Address</text>
+    <text name="ShoppingCart">Shopping Cart</text>
+    <text name="ProductName">Product Name</text>
+    <text name="Quantity">Quantity</text>
+    <text name="Total">Total</text>
+    <text name="CartIsEmpty">Cart is empty</text>
+    <text name="UpdateQuantity">Update Quantity</text>
+    <text name="ClearCart">Clear Cart</text>
+    <text name="ContinueShopping">Continue Shopping</text>
+    <text name="ProceedToCheckout">Proceed to Checkout</text>
+    <text name="SubTotal">Sub Total</text>
+    <text name="GrandTotal">Grand Total</text>
+  </texts>
+</localizationDictionary> 

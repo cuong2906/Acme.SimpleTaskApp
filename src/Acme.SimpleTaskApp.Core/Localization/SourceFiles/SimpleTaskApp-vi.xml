@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="vi">
+	<texts>
+		<!-- Common Navigation -->
+		<text name="HomePage" value="Trang chủ" />
+		<text name="About" value="Giới thiệu" />
+		<text name="Administration" value="Quản trị" />
+		<text name="Back" value="Quay lại" />
+		<text name="Clear" value="Xóa" />
+		<text name="Create" value="Tạo mới" />
+		<text name="Edit" value="Sửa" />
+		<text name="Delete" value="Xóa" />
+		<text name="Save" value="Lưu" />
+		<text name="Cancel" value="Hủy" />
+		<text name="Search" value="Tìm kiếm" />
+		<text name="Refresh" value="Làm mới" />
+		<text name="Actions" value="Thao tác" />
+		<text name="All" value="Tất cả" />
+		<text name="Filter" value="Lọc" />
+		<text name="Settings" value="Cài đặt" />
+		<text name="Optional" value="Tùy chọn" />
+		<text name="Yes" value="Có" />
+		<text name="No" value="Không" />
+
+		<!-- Welcome & General Messages -->
+		<text name="WelcomeMessage" value="Chào mừng đến với SimpleTaskApp!" />
+		<text name="FormIsNotValidMessage" value="Biểu mẫu không hợp lệ. Vui lòng kiểm tra và sửa lỗi." />
+		<text name="SavedSuccessfully" value="Lưu thành công" />
+		<text name="SuccessfullyDeleted" value="Xóa thành công" />
+		<text name="StartTyping" value="Bắt đầu nhập" />
+		<text name="PleaseWait" value="Vui lòng đợi..." />
+		<text name="ThisFieldIsRequired" value="Trường này là bắt buộc" />
+		<text name="TotalRecordsCount" value="Tổng số: {0}" />
+
+		<!-- Authentication & User Management -->
+		<text name="LogIn" value="Đăng nhập" />
+		<text name="Logout" value="Đăng xuất" />
+		<text name="Register" value="Đăng ký" />
+		<text name="OrLoginWith" value="Hoặc đăng nhập bằng" />
+		<text name="LoginFailed" value="Đăng nhập thất bại!" />
+		<text name="InvalidUserNameOrPassword" value="Tên đăng nhập hoặc mật khẩu không đúng" />
+		<text name="UserNameOrEmail" value="Tên đăng nhập hoặc email" />
+		<text name="Password" value="Mật khẩu" />
+		<text name="RememberMe" value="Ghi nhớ đăng nhập" />
+		<text name="PleaseEnterLoginInformation" value="Vui lòng nhập thông tin đăng nhập" />
+		<text name="ResetPassword" value="Đặt lại mật khẩu" />
+		<text name="UpdatePassword" value="Cập nhật mật khẩu" />
+		<text name="CurrentPassword" value="Mật khẩu hiện tại" />
+		<text name="NewPassword" value="Mật khẩu mới" />
+		<text name="ConfirmNewPassword" value="Xác nhận mật khẩu mới" />
+		<text name="PasswordsDoNotMatch" value="Mật khẩu không khớp" />
+		<text name="PasswordsMustBeAtLeast8CharactersContainLowercaseUppercaseNumber" value="Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ thường, chữ hoa và số" />
+		<text name="UserEmailIsNotConfirmedAndCanNotLogin" value="Email của bạn chưa được xác nhận. Bạn không thể đăng nhập." />
+		<text name="UserLockedOutMessage" value="Tài khoản đã bị khóa. Vui lòng thử lại sau." />
+		<text name="WaitingForEmailActivation" value="Email của bạn cần được kích hoạt" />
+		<text name="WaitingForActivationMessage" value="Tài khoản của bạn đang chờ được kích hoạt bởi quản trị viên." />
+		<text name="SuccessfullyRegistered" value="Đăng ký thành công" />
+
+		<!-- User Profile -->
+		<text name="UserName" value="Tên đăng nhập" />
+		<text name="Name" value="Tên" />
+		<text name="Surname" value="Họ" />
+		<text name="NameSurname" value="Họ tên" />
+		<text name="EmailAddress" value="Địa chỉ email" />
+		<text name="FullName" value="Họ và tên" />
+		<text name="UserDetails" value="Thông tin người dùng" />
+		<text name="UserRoles" value="Vai trò người dùng" />
+		<text name="IsActive" value="Đang hoạt động" />
+		<text name="Users" value="Người dùng" />
+		<text name="CreateNewUser" value="Tạo người dùng mới" />
+		<text name="EditUser" value="Sửa người dùng" />
+		<text name="UserDeleteWarningMessage" value="Người dùng {0} sẽ bị xóa." />
+
+		<!-- Roles -->
+		<text name="Roles" value="Vai trò" />
+		<text name="RoleName" value="Tên vai trò" />
+		<text name="DisplayName" value="Tên hiển thị" />
+		<text name="RoleDescription" value="Mô tả vai trò" />
+		<text name="CreateNewRole" value="Tạo vai trò mới" />
+		<text name="EditRole" value="Sửa vai trò" />
+		<text name="RoleDeleteWarningMessage" value="Vai trò {0} sẽ bị xóa và gỡ bỏ khỏi tất cả người dùng được gán." />
+
+		<!-- Tenants -->
+		<text name="Tenants" value="Khách thuê" />
+		<text name="CreateNewTenant" value="Tạo khách thuê mới" />
+		<text name="TenancyName" value="Tên khách thuê" />
+		<text name="TenantName_Regex_Description" value="Tên khách thuê phải có ít nhất 2 ký tự, bắt đầu bằng chữ cái và tiếp tục bằng chữ cái, số, dấu gạch ngang hoặc gạch dưới." />
+		<text name="DefaultPasswordIs" value="Mật khẩu mặc định là {0}" />
+		<text name="AdminEmailAddress" value="Địa chỉ email quản trị" />
+		<text name="AdminPassword" value="Mật khẩu quản trị" />
+		<text name="LeaveEmptyToSwitchToHost" value="Để trống để chuyển sang máy chủ" />
+		<text name="CurrentTenant" value="Khách thuê hiện tại" />
+		<text name="NotSelected" value="Chưa chọn" />
+		<text name="Change" value="Thay đổi" />
+		<text name="ChangeTenant" value="Đổi khách thuê" />
+		<text name="TenantSelection" value="Chọn khách thuê" />
+		<text name="TenantSelection_Detail" value="Vui lòng chọn một trong các khách thuê sau." />
+		<text name="TenantDeleteWarningMessage" value="Khách thuê {0} sẽ bị xóa." />
+		<text name="DatabaseConnectionString" value="Chuỗi kết nối cơ sở dữ liệu" />
+
+		<!-- Products -->
+		<text name="Products" value="Sản phẩm" />
+		<text name="Product" value="Sản phẩm" />
+		<text name="CreateNewProduct" value="Tạo sản phẩm mới" />
+		<text name="EditProduct" value="Sửa sản phẩm" />
+		<text name="Price" value="Giá" />
+		<text name="ImageUrl" value="Hình ảnh" />
+		<text name="Image" value="Hình ảnh" />
+		<text name="ProductName" value="Tên sản phẩm" />
+		<text name="UnitPrice" value="Đơn giá" />
+		<text name="Quantity" value="Số lượng" />
+
+		<!-- Categories -->
+		<text name="Categories" value="Danh mục" />
+		<text name="CategoryName" value="Tên danh mục" />
+		<text name="CategoriesName" value="Tên các danh mục" />
+
+		<!-- Orders -->
+		<text name="Orders" value="Đơn hàng" />
+		<text name="Order" value="Đơn hàng" />
+		<text name="OrderId" value="Mã đơn hàng" />
+		<text name="OrderStatus" value="Trạng thái đơn hàng" />
+		<text name="OrderDate" value="Ngày đặt hàng" />
+		<text name="OrderTotal" value="Tổng đơn hàng" />
+		<text name="OrderDetails" value="Chi tiết đơn hàng" />
+		<text name="OrderItems" value="Các mặt hàng" />
+		<text name="CreateNewOrder" value="Tạo đơn hàng mới" />
+		<text name="EditOrder" value="Sửa đơn hàng" />
+		<text name="DeleteOrder" value="Xóa đơn hàng" />
+		<text name="ViewOrder" value="Xem đơn hàng" />
+		<text name="Status" value="Trạng thái" />
+		<text name="Total" value="Tổng cộng" />
+		<text name="SubTotal" value="Tạm tính" />
+		<text name="Note" value="Ghi chú" />
+
+		<!-- Order Statuses -->
+		<text name="Pending" value="Chờ xử lý" />
+		<text name="Processing" value="Đang xử lý" />
+		<text name="Shipped" value="Đã giao hàng" />
+		<text name="Delivered" value="Đã nhận hàng" />
+		<text name="Cancelled" value="Đã hủy" />
+
+		<!-- Shopping Cart -->
+		<text name="Cart" value="Giỏ hàng" />
+		<text name="ShoppingCart" value="Giỏ hàng" />
+		<text name="CartSummary" value="Tổng quan giỏ hàng" />
+		<text name="CartItems" value="Các mặt hàng trong giỏ" />
+		<text name="CartTotal" value="Tổng giỏ hàng" />
+		<text name="CartIsEmpty" value="Giỏ hàng của bạn trống" />
+		<text name="ViewCart" value="Xem giỏ hàng" />
+		<text name="AddToCart" value="Thêm vào giỏ" />
+		<text name="UpdateCart" value="Cập nhật giỏ hàng" />
+		<text name="RemoveFromCart" value="Xóa khỏi giỏ hàng" />
+		<text name="ClearCart" value="Xóa giỏ hàng" />
+		<text name="Checkout" value="Thanh toán" />
+		<text name="ContinueShopping" value="Tiếp tục mua sắm" />
+
+		<!-- Customer Information -->
+		<text name="CustomerInfo" value="Thông tin khách hàng" />
+		<text name="CustomerName" value="Tên khách hàng" />
+		<text name="UserEmail" value="Email" />
+		<text name="UserPhone" value="Số điện thoại" />
+		<text name="ShippingAddress" value="Địa chỉ giao hàng" />
+
+		<!-- Messages -->
+		<text name="OrderSuccessMessage" value="Đơn hàng của bạn đã được đặt thành công!" />
+		<text name="CartUpdateSuccess" value="Cập nhật giỏ hàng thành công" />
+		<text name="ItemRemovedFromCart" value="Đã xóa sản phẩm khỏi giỏ hàng" />
+		<text name="ConfirmRemoveItem" value="Bạn có chắc chắn muốn xóa sản phẩm này?" />
+		<text name="ConfirmClearCart" value="Bạn có chắc chắn muốn xóa giỏ hàng?" />
+		<text name="ConfirmDeleteOrder" value="Bạn có chắc chắn muốn xóa đơn hàng này?" />
+
+		<!-- Tasks -->
+		<text name="Tasks" value="Nhiệm vụ" />
+
+		<!-- Error Pages -->
+		<text name="403PageHeader" value="Cấm truy cập" />
+		<text name="403PageDescription" value="Bạn không có quyền truy cập tài nguyên này. Vui lòng liên hệ quản trị viên." />
+		<text name="403PageButton" value="Quay lại Bảng điều khiển" />
+
+		<!-- Validation Messages -->
+		<text name="PleaseEnterAtLeastNCharacter" value="Vui lòng nhập ít nhất {0} ký tự" />
+		<text name="PleaseEnterNoMoreThanNCharacter" value="Vui lòng nhập không quá {0} ký tự" />
+		<text name="InvalidEmailAddress" value="Địa chỉ email không hợp lệ" />
+		<text name="InvalidPattern" value="Không hợp lệ" />
+		<text name="PairsDoNotMatch" value="Không khớp" />
+
+		<!-- Dates -->
+		<text name="CreationTime" value="Thời gian tạo" />
+		<text name="UpdateTime" value="Thời gian cập nhật" />
+	</texts>
+</localizationDictionary>

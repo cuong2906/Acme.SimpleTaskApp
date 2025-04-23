@@ -1,0 +1,58 @@
+﻿@using Acme.SimpleTaskApp.Products.Dto
+@model Acme.SimpleTaskApp.Web.Models.Products.IndexViewModel
+
+<div class="abp-advanced-search">
+    <form id="ProductsSearchForm" class="form-horizontal">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <button type="button" class="btn bg-blue btn-search">
+                    <span class="fas fa-search" aria-hidden="true"></span>
+                </button>
+            </div>
+            <input type="text" name="Keyword" class="form-control txt-search" />
+
+            <!-- Dropdown filter for Price Range -->
+            <div class="dropdown input-group-append">
+                <button type="button"
+                        class="btn btn-default dropdown-toggle"
+                        data-toggle="dropdown"
+                        aria-expanded="false">
+                    <i class="fas fa-filter"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right dd-menu" role="menu" style="padding: 0">
+                    <div class="card" style="margin-bottom: 0">
+                        <div class="card-body">
+                            <!-- Lọc theo khoảng giá -->
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Giá tối thiểu</label>
+                                <div class="col-md-10">
+                                    <input type="number" class="form-control" name="MinPrice" placeholder="Giá từ" min="0" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Giá tối đa</label>
+                                <div class="col-md-10">
+                                    <input type="number" class="form-control" name="MaxPrice" placeholder="Giá đến" min="0" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Danh mục</label>
+                                <div class="col-md-10">
+                                    @Html.DropDownList("CategoryId", Model.Categories, "--Tất cả danh mục--", new
+                                    {
+                                        @class = "form-control",
+                                        name = "CategoryId"
+                                    })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-default btn-clear"><i class="fas fa-backspace"></i></button>
+                            <button type="button" class="btn bg-blue float-right btn-search"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

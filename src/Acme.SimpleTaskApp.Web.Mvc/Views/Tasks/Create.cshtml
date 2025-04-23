@@ -1,0 +1,60 @@
+﻿@using Acme.SimpleTaskApp.Web.Models.Tasks
+@model CreateTaskViewModel
+
+@section scripts
+{
+    <environment names="Development">
+        <script src="~/view-resources/Views/Tasks/Create.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/view-resources/Views/Tasks/Create.js" asp-append-version="true"></script>
+    </environment>
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                @* <h1>@L("NewTask")</h1> *@
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>@("Tạo Task mới")</h4>
+                    </div>
+                    <div class="card-body">
+                        <form id="TaskCreationForm">
+                            <div class="form-group">
+                                <label for="Title">@("Title")</label>
+                                <input type="text" name="Title" class="form-control" placeholder="@("Title")" required maxlength="@Acme.SimpleTaskApp.Tasks.Tasks.MaxTitleLength">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Description">@("Description")</label>
+                                <input type="text" name="Description" class="form-control" placeholder="@("Mô tả")" maxlength="@Acme.SimpleTaskApp.Tasks.Tasks.MaxDescriptionLength">
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label(("AssignedPerson"))
+                                @Html.DropDownList(
+                                    "AssignedPersonId",
+                                    Model.People,
+                                    new { @class = "form-control", id = "AssignedPersonCombobox" })
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">@("Lưu")</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

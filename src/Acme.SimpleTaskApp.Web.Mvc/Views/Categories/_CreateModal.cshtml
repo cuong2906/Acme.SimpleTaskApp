@@ -1,0 +1,25 @@
+﻿@using Acme.SimpleTaskApp.Web.Models.Common.Modals
+@{
+    Layout = null;
+}
+
+<div id="createModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createModalLabel " aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(("Tạo danh mục ")))
+            <form name="categoryCreateForm" role="form" class="form-horizontal">
+                <div class="modal-body">
+                    @* <input type="hidden" name="Id"> *@
+                    <div class="form-group row required">
+                        <label for="name " class="col-md-3 col-form-label">Tên sản phẩm</label>
+                        <input type="text" class="form-control" name="NameCategory" >
+                    </div>
+                    
+                    
+                </div>
+                @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+
+            </form>
+        </div>
+    </div>
+</div>

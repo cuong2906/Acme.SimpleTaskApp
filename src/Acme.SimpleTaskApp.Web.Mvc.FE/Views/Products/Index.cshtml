@@ -1,0 +1,100 @@
+﻿    @using Acme.SimpleTaskApp.Authorization
+    @model Acme.SimpleTaskApp.Web.Models.Products.IndexViewModel
+    @inject Abp.Authorization.IPermissionChecker PermissionChecker
+
+@{
+    ViewBag.Title = L("Products");
+    ViewBag.ActiveMenu = "Products";
+    var canCreate = await PermissionChecker.IsGrantedAsync(PermissionNames.Pages_Products_Create);
+    var canEdit = await PermissionChecker.IsGrantedAsync(PermissionNames.Pages_Products_Edit);
+}
+
+@section scripts
+    {
+    <environment names="Development">
+        <script src="~/view-resources/Views/Products/Index.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/view-resources/Views/Products/Index.min.js" asp-append-version="true"></script>
+    </environment>
+
+    }
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>@L("Product")</h1>
+            </div>
+            <div class="col-sm-6">
+                @if (canCreate)
+                {
+                    <button class=" btn bg-blue float-sm-right" data-toggle="modal" data-target="#createModal">
+                        <i class="fa fa-plus-square"></i>
+                        @L("Create")
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!--Use for bulk actions-->
+                            </div>
+                            <div class="col-md-6">
+                                @await Html.PartialAsync("~/Views/Products/Index.AdvancedSearch.cshtml")
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="ProductsTable" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>@L("Name")</th>
+                                        <th>@L("Price")</th>
+                                        <th>@L("ImageUrl")</th>
+                                        <th>@L("CategoriesName")</th>
+                                        <th>@L("CreationTime")</th>
+                                        <th>@L("UpdateTime")</th>
+                                        <th>@L("AddToCart")</th>
+                                        @if (canEdit)
+                                        {
+                                            <th style="width: 150px">@L("Actions")</th>
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@if (canCreate)
+{
+    @await Html.PartialAsync("~/Views/Products/_CreateModal.cshtml", Model)
+}
+
+@if (canEdit)
+{
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel " data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+}

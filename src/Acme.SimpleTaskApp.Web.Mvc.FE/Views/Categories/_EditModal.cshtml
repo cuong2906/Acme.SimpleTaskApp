@@ -1,0 +1,25 @@
+﻿@using Acme.SimpleTaskApp.Web.Models.Common.Modals
+@using Acme.SimpleTaskApp.Web.Models.Categories
+@model IndexViewModel
+
+@{
+    Layout = null;
+}
+<script src="~/view-resources/Views/Categories/_EditModal.js" asp-append-version="true"></script>
+
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("EditCategory")))
+
+<form name="CategoryEditForm" role="form" class="form-horizontal">
+    <input type="hidden" name="Id" value="@Model.Category.Id" />
+
+    <div class="modal-body">
+        <div class="form-group row required">
+            <label for="NameCategory" class="col-md-3 col-form-label">@L("Name")</label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" name="NameCategory" id="NameCategory" value="@Model.Category.NameCategory" required />
+            </div>
+        </div>
+    </div>
+
+    @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+</form>
