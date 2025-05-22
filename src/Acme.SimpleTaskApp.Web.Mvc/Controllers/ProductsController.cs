@@ -68,5 +68,14 @@ namespace Acme.SimpleTaskApp.Web.Controllers
 
             return PartialView("_EditModal", model);
         }
+        public async Task<ActionResult> Search(PagedProductDto input)
+        {
+            PagedProductDto pagedProductDto = new PagedProductDto();
+            pagedProductDto.Keyword = input.Keyword;
+            pagedProductDto.MaxResultCount = 20;
+            pagedProductDto.SkipCount = input.SkipCount;
+            var list = await _productAppService.GetProductPaged(pagedProductDto);
+            return PartialView("_ProductList", list);
+        }
     }
 }

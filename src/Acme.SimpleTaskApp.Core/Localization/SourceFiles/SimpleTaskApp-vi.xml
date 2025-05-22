@@ -21,6 +21,7 @@
 		<text name="Optional" value="Tùy chọn" />
 		<text name="Yes" value="Có" />
 		<text name="No" value="Không" />
+		<text name="ViewDetails" value="Xem chi tiết" />
 
 		<!-- Welcome & General Messages -->
 		<text name="WelcomeMessage" value="Chào mừng đến với SimpleTaskApp!" />
@@ -109,11 +110,30 @@
 		<text name="ProductName" value="Tên sản phẩm" />
 		<text name="UnitPrice" value="Đơn giá" />
 		<text name="Quantity" value="Số lượng" />
+		<text name="SearchProducts" value="Tìm kiếm sản phẩm..." />
+		<text name="MinPrice" value="Giá tối thiểu" />
+		<text name="MaxPrice" value="Giá tối đa" />
+		<text name="MinPricePlaceholder" value="Giá từ" />
+		<text name="MaxPricePlaceholder" value="Giá đến" />
+		<text name="AllCategories" value="Tất cả danh mục" />
+		<text name="InStock" value="còn hàng" />
+		<text name="OutOfStock" value="hết hàng" />
+		<text name="NoProductsFound" value="Không tìm thấy sản phẩm nào" />
+		<text name="ShowingXtoYofZResults" value="Hiển thị {0} đến {1} của {2} kết quả" />
+		<text name="BackToProducts" value="Quay lại danh sách sản phẩm" />
+		<text name="ViewProducts" value="Xem sản phẩm" />
+		<text name="NoItemsInCart" value="Không có sản phẩm nào trong giỏ hàng" />
+		<text name="TotalAmount" value="Tổng tiền" />
+		<text name="LastModificationTime" value="Lần cập nhật cuối" />
+		<text name="ProductDetails" value="Chi tiết sản phẩm" />
+		<text name="Category" value="Danh mục" />
+		<text name="Reset" value="Reset" />
 
 		<!-- Categories -->
 		<text name="Categories" value="Danh mục" />
 		<text name="CategoryName" value="Tên danh mục" />
 		<text name="CategoriesName" value="Tên các danh mục" />
+		<text name="EditCategory" value="Sửa danh mục" />
 
 		<!-- Orders -->
 		<text name="Orders" value="Đơn hàng" />
@@ -172,6 +192,7 @@
 
 		<!-- Tasks -->
 		<text name="Tasks" value="Nhiệm vụ" />
+		<text name="TaskList" value="Danh sách nhiệm vụ" />
 
 		<!-- Error Pages -->
 		<text name="403PageHeader" value="Cấm truy cập" />

@@ -2,18 +2,22 @@
     var _orderService = abp.services.app.order,
         l = abp.localization.getSource('SimpleTaskApp'),
         _$modal = $('#editModal'),
-        _$form = _$modal.find('form');
+        _$form = null;
 
-    _$form.validate({
-        rules: {
-            Status: "required"
-        }
-    });
+    function initializeForm() {
+        _$form = _$modal.find('form[name="OrderEditForm"]');
+        
+        _$form.validate({
+            rules: {
+                Status: "required"
+            }
+        });
+    }
 
-    _$form.find('button[type="submit"]').click(function (e) {
+    _$modal.find('._save-button').click(function (e) {
         e.preventDefault();
-
-        if (!_$form.valid()) {
+        _$form = _$modal.find('form[name="OrderEditForm"]');
+        if (!_$form || !_$form.valid()) {
             return;
         }
 
@@ -34,6 +38,7 @@
     });
 
     _$modal.on('shown.bs.modal', function () {
+        initializeForm();
         _$modal.find('input:not([type=hidden]):first').focus();
     });
 })(jQuery); 

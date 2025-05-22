@@ -32,27 +32,10 @@ namespace Acme.SimpleTaskApp.Web.Startup
                 )
                 .AddItem(
                     new MenuItemDefinition(
-                        PageNames.Tasks,
-                        L("Tasks"),
-                        url: "Tasks",
-                        icon: "fa fa-tasks"
-                    )
-                )
-                .AddItem(
-                    new MenuItemDefinition(
                         PageNames.Products,
                         L("Product"),
                         url: "Products",
                         icon: "fas fa-box"
-                    )
-                )
-                .AddItem(
-                    new MenuItemDefinition(
-                        PageNames.Cart,
-                        L("Cart"),
-                        url: "Cart",
-                        icon: "fas fa-shopping-cart",
-                        requiresAuthentication: true
                     )
                 )
                 .AddItem(

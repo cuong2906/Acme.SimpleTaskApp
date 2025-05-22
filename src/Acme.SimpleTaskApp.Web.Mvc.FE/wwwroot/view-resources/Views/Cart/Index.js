@@ -1,7 +1,7 @@
 $(function () {
     var _cartService = abp.services.app.cart;
 
-    // Xử lý tăng số lượng
+    // Handle quantity increase
     $('.increase-quantity').click(function () {
         var productId = $(this).data('product-id');
         var input = $('input[data-product-id="' + productId + '"]');
@@ -9,7 +9,7 @@ $(function () {
         input.val(currentValue + 1).trigger('change');
     });
 
-    // Xử lý giảm số lượng
+    // Handle quantity decrease
     $('.decrease-quantity').click(function () {
         var productId = $(this).data('product-id');
         var input = $('input[data-product-id="' + productId + '"]');
@@ -19,42 +19,48 @@ $(function () {
         }
     });
 
-    // Xử lý thay đổi số lượng
+    // Handle quantity change
     $('.quantity-input').change(function () {
         var productId = $(this).data('product-id');
         var quantity = parseInt($(this).val());
+        var card = $(this).closest('.card');
 
         if (quantity < 1) {
             $(this).val(1);
             quantity = 1;
         }
 
-        // Lấy giá tiền của sản phẩm
-        var price = parseFloat($(this).closest('tr').find('td:eq(1)').text().replace(/[^0-9.-]+/g, ''));
-        
-        // Tính và cập nhật tổng tiền của sản phẩm
-        var totalPrice = price * quantity;
-        $(this).closest('tr').find('td:eq(3)').text(formatCurrency(totalPrice));
+        // Get product price
+        var price = parseFloat(card.find('.text-success').text().replace(/[^0-9.-]+/g, ''));
 
-        // Tính tổng tiền của giỏ hàng
+        // Calculate and update item total
+        var totalPrice = price * quantity;
+        card.find('.text-end.fw-medium').text(formatCurrency(totalPrice));
+
+        // Calculate cart total
         var cartTotal = 0;
-        $('.quantity-input').each(function() {
+        $('.quantity-input').each(function () {
             var qty = parseInt($(this).val());
-            var prc = parseFloat($(this).closest('tr').find('td:eq(1)').text().replace(/[^0-9.-]+/g, ''));
+            var prc = parseFloat($(this).closest('.card').find('.text-success').text().replace(/[^0-9.-]+/g, ''));
             cartTotal += qty * prc;
         });
 
-        // Cập nhật tổng tiền của giỏ hàng
-        $('tfoot tr td:last').text(formatCurrency(cartTotal));
+        // Update cart totals in summary
+        $('.fw-bold.fs-5 span:last').text(formatCurrency(cartTotal));
+        $('.fw-medium span:last').text(formatCurrency(cartTotal));
 
-        // Gọi API để cập nhật server
+        // Update item summary
+        updateItemSummary(productId, quantity, totalPrice);
+
+        // Call API to update server
         updateCartItem(productId, quantity);
     });
 
-    // Xử lý xóa sản phẩm khỏi giỏ hàng
+    // Handle remove from cart
     $('.remove-from-cart').click(function () {
         var productId = $(this).data('product-id');
-        
+        var card = $(this).closest('.card');
+
         abp.message.confirm(
             abp.localization.localize('AreYouSureToRemoveTheCartItem', 'SimpleTaskApp'),
             abp.localization.localize('Confirmation', 'SimpleTaskApp'),
@@ -64,14 +70,20 @@ $(function () {
                         productId: productId
                     }).done(function () {
                         abp.notify.success(abp.localization.localize('SuccessfullyRemoved', 'SimpleTaskApp'));
-                        location.reload();
+                        card.fadeOut(300, function() {
+                            $(this).remove();
+                            updateCartSummary();
+                            if ($('.card').length === 0) {
+                                location.reload(); // Reload to show empty cart state
+                            }
+                        });
                     });
                 }
             }
         );
     });
 
-    // Xử lý nút thanh toán
+    // Handle checkout button
     $('#checkoutButton').click(function () {
         abp.message.confirm(
             abp.localization.localize('AreYouSureToCheckout', 'SimpleTaskApp'),
@@ -92,6 +104,29 @@ $(function () {
             productId: productId,
             quantity: quantity
         });
+    }
+
+    function updateItemSummary(productId, quantity, totalPrice) {
+        var summaryItem = $('.border-top.border-bottom .d-flex').filter(function() {
+            return $(this).find('span:first').text().includes(productId);
+        });
+
+        if (summaryItem.length) {
+            summaryItem.find('span:first').text(productId + ' x ' + quantity);
+            summaryItem.find('span:last').text(formatCurrency(totalPrice));
+        }
+    }
+
+    function updateCartSummary() {
+        var cartTotal = 0;
+        $('.quantity-input').each(function () {
+            var qty = parseInt($(this).val());
+            var prc = parseFloat($(this).closest('.card').find('.text-success').text().replace(/[^0-9.-]+/g, ''));
+            cartTotal += qty * prc;
+        });
+
+        $('.fw-bold.fs-5 span:last').text(formatCurrency(cartTotal));
+        $('.fw-medium span:last').text(formatCurrency(cartTotal));
     }
 
     function formatCurrency(amount) {

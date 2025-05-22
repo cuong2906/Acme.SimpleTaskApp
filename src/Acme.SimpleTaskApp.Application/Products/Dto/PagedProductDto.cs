@@ -8,5 +8,12 @@ namespace Acme.SimpleTaskApp.Products.Dto
         public decimal? MinPrice { get; set; }  // Tham số lọc giá tối thiểu
         public decimal? MaxPrice { get; set; }  // Tham số lọc giá tối đa
         public int? CategoryId { get; set; }    // Tham số lọc theo danh mục
+
+        public PagedProductDto()
+        {
+            MaxResultCount = 10;
+            SkipCount = 0;
+            Sorting = "CreationTime DESC";
+        }
     }
 }

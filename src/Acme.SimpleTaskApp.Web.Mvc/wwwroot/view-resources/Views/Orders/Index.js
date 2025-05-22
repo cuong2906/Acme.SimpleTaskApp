@@ -2,7 +2,6 @@
     var _orderService = abp.services.app.order,
         l = abp.localization.getSource('SimpleTaskApp'),
         _$modal = $('#editModal'),
-        _$form = _$modal.find('form'),
         _$table = $('#OrdersTable');
 
     var _permissions = {
@@ -109,17 +108,17 @@
                     if (!_permissions.edit && !_permissions.delete) {
                         return '';
                     }
-                    
+
                     let buttons = [];
-                    
+
                     if (_permissions.edit) {
                         buttons.push(`
-                            <button type="button" class="dropdown-item text-secondary edit-order" data-order-id="${row.id}" data-toggle="modal" data-target="#editModal">
+                            <button type="button" class="dropdown-item text-secondary edit-order" data-order-id="${row.id}">
                                 <i class="fas fa-edit mr-2"></i>  ${l('Edit')}
                             </button>
                         `);
                     }
-                    
+
                     if (_permissions.delete) {
                         if (buttons.length > 0) {
                             buttons.push('<div class="dropdown-divider m-0"></div>');
@@ -130,7 +129,7 @@
                             </button>
                         `);
                     }
-                    
+
                     return buttons.join('');
                 }
             }
@@ -140,7 +139,7 @@
     $(document).on('click', '.edit-order', function (e) {
         e.preventDefault();
         if (!_permissions.edit) {
-            abp.message.warn("Bạn không đủ quyền để chỉnh sửa đơn hàng!");
+            abp.message.warn("Bạn không có quyền để chỉnh sửa đơn hàng!");
             return;
         }
         var orderId = $(this).attr('data-order-id');
@@ -150,7 +149,11 @@
             type: 'POST',
             dataType: 'html',
             success: function (content) {
-                $('#editModal div.modal-content').html(content);
+                $('#editModalContent').html(content);
+                $('#editModal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
             },
             error: function (e) {
                 abp.notify.error(l('ErrorLoadingData'));
@@ -158,13 +161,37 @@
         });
     });
 
+    $(document).on('click', '.save-button', function (e) {
+        e.preventDefault();
+        var _$form = $('#OrderEditForm');
+        
+        if (!_$form || !_$form.valid()) {
+            return;
+        }
+
+        var order = _$form.serializeFormToObject();
+
+        abp.ui.setBusy(_$modal);
+        _orderService.updateOrderStatus({
+            id: order.Id,
+            status: parseInt(order.Status),
+            note: order.Note
+        }).done(function () {
+            _$modal.modal('hide');
+            abp.notify.info(l('SavedSuccessfully'));
+            abp.event.trigger('order.edited', order);
+        }).always(function () {
+            abp.ui.clearBusy(_$modal);
+        });
+    });
+
     abp.event.on('order.edited', (data) => {
-        _$ordersTable.ajax.reload();
+        _$table.DataTable().ajax.reload();
     });
 
     $(document).on('click', '.delete-order', function () {
         if (!_permissions.delete) {
-            abp.message.warn("Bạn không đủ quyền để xoá đơn hàng!");
+            abp.message.warn("Bạn không có quyền để xóa đơn hàng!");
             return;
         }
 

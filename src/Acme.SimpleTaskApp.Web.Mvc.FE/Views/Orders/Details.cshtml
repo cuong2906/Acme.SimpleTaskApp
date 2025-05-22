@@ -1,0 +1,127 @@
+@model Acme.SimpleTaskApp.Orders.Dto.OrderDto
+@using System.Globalization
+@using Acme.SimpleTaskApp.Orders
+@{
+    ViewBag.Title = "Chi tiết đơn hàng";
+    string FormatCurrency(decimal value) => value.ToString("C0", CultureInfo.GetCultureInfo("vi-VN"));
+    string FormatDate(DateTime date) => date.ToString("dd/MM/yyyy HH:mm");
+    string GetStatusText(OrderStatus status) => status switch
+    {
+        OrderStatus.Pending => "Chờ xác nhận",
+        OrderStatus.Processing => "Đang xử lý",
+        OrderStatus.Shipped => "Đã giao hàng",
+        OrderStatus.Delivered => "Đã nhận hàng",
+        OrderStatus.Cancelled => "Đã hủy",
+        _ => status.ToString()
+    };
+    string GetStatusColor(OrderStatus status) => status switch
+    {
+        OrderStatus.Pending => "bg-warning",
+        OrderStatus.Processing => "bg-info",
+        OrderStatus.Shipped => "bg-primary",
+        OrderStatus.Delivered => "bg-success",
+        OrderStatus.Cancelled => "bg-danger",
+        _ => "bg-secondary"
+    };
+}
+
+<div class="container py-8">
+    <div class="mb-6 d-flex justify-content-between print:hidden">
+        <a href="/orders" class="btn btn-outline">
+            <i class="bi bi-arrow-left me-2"></i> Quay lại danh sách
+        </a>
+    </div>
+
+    <div class="card">
+        <div class="card-body p-6">
+            <div class="d-flex justify-content-between align-items-start mb-6">
+                <div>
+                    <h1 class="text-3xl font-bold text-success">WheyShop</h1>
+                    <p class="text-muted">Cửa hàng Whey Protein chất lượng cao</p>
+                </div>
+                <div class="text-end">
+                    <h2 class="text-2xl font-bold">Hóa đơn</h2>
+                    <p class="text-muted">#@Model.Id</p>
+                </div>
+            </div>
+
+            <div class="row mb-6">
+                <div class="col-md-6">
+                    <h3 class="font-semibold mb-2">Thông tin khách hàng:</h3>
+                    <p class="font-medium">@Model.UserName</p>
+                    <p>@Model.UserEmail</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <h3 class="font-semibold mb-2">Thông tin đơn hàng:</h3>
+                    <p>Ngày đặt hàng: @Model.CreationTime.ToString("dd/MM/yyyy HH:mm")</p>
+                    <p>Trạng thái: <span class="badge @GetStatusColor(Model.Status)">@GetStatusText(Model.Status)</span></p>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="font-semibold mb-4">Chi tiết đơn hàng:</h3>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Sản phẩm</th>
+                                <th class="text-center">Số lượng</th>
+                                <th class="text-end">Đơn giá</th>
+                                <th class="text-end">Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.OrderItems)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div>
+                                                <p class="font-medium">@item.ProductName</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">@item.Quantity</td>
+                                    <td class="text-end">@FormatCurrency(item.Price)</td>
+                                    <td class="text-end">@FormatCurrency(item.TotalPrice)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <div class="w-100" style="max-width: 300px;">
+                    <div class="d-flex justify-content-between py-2">
+                        <span>Tạm tính:</span>
+                        <span>@FormatCurrency(Model.TotalAmount)</span>
+                    </div>
+                    <div class="d-flex justify-content-between py-2">
+                        <span>Phí vận chuyển:</span>
+                        <span>Miễn phí</span>
+                    </div>
+                    <div class="d-flex justify-content-between py-2 border-top">
+                        <span class="font-bold">Tổng cộng:</span>
+                        <span class="font-bold">@FormatCurrency(Model.TotalAmount)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-6 border-top text-center text-muted">
+                <p>Cảm ơn bạn đã mua hàng tại WheyShop!</p>
+                <p>Nếu có bất kỳ thắc mắc nào, vui lòng liên hệ qua email: support@wheyshop.com</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles {
+    <style>
+        @@media print {
+            .print\:hidden {
+                display: none !important;
+            }
+        }
+    </style>
+} 

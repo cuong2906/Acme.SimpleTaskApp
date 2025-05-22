@@ -1,0 +1,102 @@
+@model Abp.Application.Services.Dto.PagedResultDto<Acme.SimpleTaskApp.Products.Dto.ProductDto>
+@{
+    var pageSize = 10; // Default page size
+    var totalPages = (int)Math.Ceiling(Model.TotalCount / (double)pageSize);
+    var currentPage = 1; // Default to first page
+}
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    @foreach (var product in Model.Items)
+    {
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <img src="@product.ImageUrl" alt="@product.Name" class="w-full h-48 object-cover" />
+            <div class="p-4">
+                <h3 class="text-lg font-semibold mb-2">@product.Name</h3>
+                <p class="text-green-600 font-bold mb-2">@product.Price.ToString("C")</p>
+                <p class="text-gray-600 text-sm mb-2">@L("Category"): @product.NameCategory</p>
+                <p class="text-gray-600 text-sm mb-4">
+                    @if (product.Quantity > 0)
+                    {
+                        <span class="text-green-500">@L("InStock") (@product.Quantity)</span>
+                    }
+                    else
+                    {
+                        <span class="text-red-500">@L("OutOfStock")</span>
+                    }
+                </p>
+                <a href="@Url.Action("Detail", "Products", new { id = product.Id })" 
+                   class="block w-full text-center bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors">
+                    @L("ViewDetails")
+                </a>
+            </div>
+        </div>
+    }
+</div>
+
+@if (Model.TotalCount > 0)
+{
+    <div class="mt-6 flex justify-center">
+        <nav aria-label="Page navigation">
+            <ul class="flex items-center space-x-2">
+                @if (currentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100" 
+                           asp-controller="Products" 
+                           asp-action="Index"
+                           asp-route-keyword="@ViewBag.CurrentKeyword"
+                           asp-route-categoryId="@ViewBag.CurrentCategoryId"
+                           asp-route-minPrice="@ViewBag.CurrentMinPrice"
+                           asp-route-maxPrice="@ViewBag.CurrentMaxPrice"
+                           asp-route-skipCount="@((currentPage - 1) * pageSize)"
+                           asp-route-maxResultCount="@pageSize"
+                           aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                }
+
+                @for (int i = 1; i <= totalPages; i++)
+                {
+                    <li class="page-item @(i == currentPage ? "bg-blue-600 text-white" : "text-gray-600 hover:bg-gray-100")">
+                        <a class="page-link px-3 py-2 rounded-md" 
+                           asp-controller="Products" 
+                           asp-action="Index"
+                           asp-route-keyword="@ViewBag.CurrentKeyword"
+                           asp-route-categoryId="@ViewBag.CurrentCategoryId"
+                           asp-route-minPrice="@ViewBag.CurrentMinPrice"
+                           asp-route-maxPrice="@ViewBag.CurrentMaxPrice"
+                           asp-route-skipCount="@((i - 1) * pageSize)"
+                           asp-route-maxResultCount="@pageSize">
+                            @i
+                        </a>
+                    </li>
+                }
+
+                @if (currentPage < totalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100" 
+                           asp-controller="Products" 
+                           asp-action="Index"
+                           asp-route-keyword="@ViewBag.CurrentKeyword"
+                           asp-route-categoryId="@ViewBag.CurrentCategoryId"
+                           asp-route-minPrice="@ViewBag.CurrentMinPrice"
+                           asp-route-maxPrice="@ViewBag.CurrentMaxPrice"
+                           asp-route-skipCount="@(currentPage * pageSize)"
+                           asp-route-maxResultCount="@pageSize"
+                           aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+}
+else
+{
+    <div class="text-center py-8 text-gray-500">
+        @L("NoProductsFound")
+    </div>
+} 

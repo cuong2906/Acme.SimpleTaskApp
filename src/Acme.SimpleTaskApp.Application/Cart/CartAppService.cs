@@ -63,6 +63,7 @@ namespace Acme.SimpleTaskApp.Cart
             {
                 var product = await _productRepository.GetAsync(item.ProductId);
                 item.ProductName = product.Name;
+                item.ImageUrl = product.ImageUrl;
             }
 
             return cartDto;

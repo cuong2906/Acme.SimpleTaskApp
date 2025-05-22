@@ -15,11 +15,8 @@
         serverSide: true,
         ordering: true,
         processing: true,
-        order: [[7, 'desc']],
+        order: [[5, 'desc']],
         dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ],
         listAction: {
             ajaxFunction: _orderService.getAllOrders,
             inputFilter: function () {
@@ -45,16 +42,6 @@
             },
             {
                 targets: 3,
-                data: 'userPhone',
-                orderable: true
-            },
-            {
-                targets: 4,
-                data: 'shippingAddress',
-                orderable: true
-            },
-            {
-                targets: 5,
                 data: 'totalAmount',
                 orderable: true,
                 render: function (data, type, row, meta) {
@@ -63,7 +50,7 @@
                 }
             },
             {
-                targets: 6,
+                targets: 4,
                 data: 'statusText',
                 orderable: true,
                 render: function (data, type, row, meta) {
@@ -89,7 +76,7 @@
                 }
             },
             {
-                targets: 7,
+                targets: 5,
                 data: 'creationTime',
                 orderable: true,
                 render: function (data, type, row, meta) {
@@ -99,7 +86,7 @@
                 }
             },
             {
-                targets: 8,
+                targets: 6,
                 data: 'lastModificationTime',
                 orderable: true,
                 render: function (data, type, row, meta) {
@@ -109,7 +96,7 @@
                 }
             },
             {
-                targets: 9,
+                targets: 7,
                 data: null,
                 orderable: false,
                 autoWidth: false,
@@ -209,4 +196,47 @@
     $('#OrdersSearchForm select').on('change', () => {
         _$ordersTable.ajax.reload();
     });
+
+    _$form.closest('div.modal-content').find(".save-button").click(function (e) {
+        e.preventDefault();
+        save();
+    });
+
+    function save() {
+        if (!_$form.valid()) {
+            return;
+        }
+
+        var order = _$form.serializeFormToObject();
+
+        abp.message.confirm(
+            l('AreYouSureToSaveChanges'),
+            null,
+            (isConfirmed) => {
+                if (isConfirmed) {
+                    abp.ui.setBusy(_$modal);
+                    _orderService.updateOrderStatus({
+                        id: order.Id,
+                        status: parseInt(order.Status),
+                        note: order.Note
+                    }).done(function () {
+                        _$modal.modal('hide');
+                        abp.notify.success(l('SavedSuccessfully'));
+                        abp.event.trigger('order.edited', order);
+                    }).fail(function (error) {
+                        abp.notify.error(l('ErrorSavingChanges'));
+                        console.error(error);
+                    }).always(function () {
+                        abp.ui.clearBusy(_$modal);
+                    });
+                }
+            }
+        );
+    }
+
+    // Initialize any necessary functionality here
+    $(document).ready(function() {
+        // Add any initialization code if needed
+    });
+
 })(jQuery); 

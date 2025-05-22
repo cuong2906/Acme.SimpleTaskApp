@@ -1,0 +1,72 @@
+@model Acme.SimpleTaskApp.Products.Dto.ProductDto
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+@section scripts
+{
+    <environment names="Development">
+        <script src="~/view-resources/Views/Products/Detail.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/view-resources/Views/Products/Detail.min.js" asp-append-version="true"></script>
+    </environment>
+}
+
+<div class="container py-8">
+    <a href="@Url.Action("Index", "Products")" class="inline-flex items-center text-gray-600 hover:text-gray-900 mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        @L("BackToProducts")
+    </a>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="rounded-lg overflow-hidden border">
+            <img src="@Model.ImageUrl" alt="@Model.Name" class="w-full h-auto object-cover" />
+        </div>
+
+        <div class="space-y-6">
+            <div>
+                <h1 class="text-3xl font-bold">@Model.Name</h1>
+                <p class="text-lg font-semibold text-green-600 mt-2">@Model.Price.ToString("C")</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 py-4 border-y">
+                <div>
+                    <p class="text-sm text-gray-500">@L("Category")</p>
+                    <p class="font-medium">@Model.NameCategory</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500">@L("Quantity")</p>
+                    <p class="font-medium">
+                        @(Model.Quantity > 0 ? $"{L("InStock")} ({Model.Quantity})" : L("OutOfStock"))
+                    </p>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-semibold mb-2">@L("ProductDetails")</h2>
+                <p class="text-gray-600">Whey Protein l� ngu?n ??m tinh khi?t ???c chi?t xu?t t? s?a, h? tr? t?ng c?, ph?c h?i sau t?p v� b? sung dinh d??ng h�ng ng�y cho ng??i t?p luy?n th? thao. S?n ph?m cung c?p h�m l??ng protein cao, d? h?p th? v� �t ch?t b�o, gi�p x�y d?ng c? b?p hi?u qu? v� duy tr� v�c d�ng s?n ch?c.</p>
+            </div>
+
+            @if (Model.Quantity > 0)
+            {
+                <form method="post" class="mt-6">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <button type="submit" class="w-full bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition-colors">
+                        @L("AddToCart")
+                    </button>
+                </form>
+            }
+            else
+            {
+                <button disabled class="w-full bg-gray-400 text-white py-3 px-6 rounded-lg cursor-not-allowed">
+                    @L("OutOfStock")
+                </button>
+            }
+        </div>
+    </div>
+</div> 

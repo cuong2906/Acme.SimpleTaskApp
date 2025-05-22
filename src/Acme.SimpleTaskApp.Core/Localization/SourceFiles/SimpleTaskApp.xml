@@ -21,6 +21,7 @@
     <text name="Optional" value="Optional" />
     <text name="Yes" value="Yes" />
     <text name="No" value="No" />
+    <text name="ViewDetails" value="View Details" />
 
     <!-- Welcome & General Messages -->
     <text name="WelcomeMessage" value="Welcome to SimpleTaskApp!" />
@@ -109,11 +110,30 @@
     <text name="ProductName" value="Product Name" />
     <text name="UnitPrice" value="Unit Price" />
     <text name="Quantity" value="Quantity" />
+    <text name="SearchProducts" value="Search products..." />
+    <text name="MinPrice" value="Minimum Price" />
+    <text name="MaxPrice" value="Maximum Price" />
+    <text name="MinPricePlaceholder" value="Price from" />
+    <text name="MaxPricePlaceholder" value="Price to" />
+    <text name="AllCategories" value="All Categories" />
+    <text name="InStock" value="in stock" />
+    <text name="OutOfStock" value="out of stock" />
+    <text name="NoProductsFound" value="No products found" />
+    <text name="ShowingXtoYofZResults" value="Showing {0} to {1} of {2} results" />
+    <text name="BackToProducts" value="Back to Products" />
+    <text name="ViewProducts" value="View Products" />
+    <text name="NoItemsInCart" value="There are no items in your cart" />
+    <text name="TotalAmount" value="Total Amount" />
+    <text name="LastModificationTime" value="Last Modified" />
+    <text name="ProductDetails" value="Product Details" />
+	  <text name="Category" value="Category" />
+	  <text name="Reset" value="Reset" />
 
     <!-- Categories -->
     <text name="Categories" value="Categories" />
     <text name="CategoryName" value="Category Name" />
     <text name="CategoriesName" value="Categories Name" />
+    <text name="EditCategory" value="Edit Category" />
 
     <!-- Orders -->
     <text name="Orders" value="Orders" />
@@ -172,6 +192,7 @@
 
     <!-- Tasks -->
     <text name="Tasks" value="Tasks" />
+    <text name="TaskList" value="Task List" />
 
     <!-- Error Pages -->
     <text name="403PageHeader" value="Forbidden" />

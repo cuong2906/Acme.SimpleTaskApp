@@ -38,7 +38,8 @@ namespace Acme.SimpleTaskApp.Web.Mvc.Controllers
                     ProductName = item.ProductName,
                     Price = item.Price,
                     Quantity = item.Quantity,
-                    TotalPrice = item.Price * item.Quantity
+                    TotalPrice = item.Price * item.Quantity,
+                    ImageUrl = item.ImageUrl
                 }).ToList(),
                 TotalPrice = cartDto.TotalPrice,
                 UserId = cartDto.UserId

@@ -142,21 +142,6 @@
                 orderable: false,
                 autoWidth: false,
                 defaultContent: '',
-                visible: _permissions.addToCart,
-                render: function (data, type, row, meta) {
-                    return `
-                        <button type="button" class="btn btn-sm btn-primary add-to-cart" data-product-id="${row.id}" data-product-name="${row.name}">
-                            <i class="fas fa-cart-plus mr-1"></i> ${l('AddToCart')}
-                        </button>
-                    `;
-                }
-            },
-            {
-                targets: 9,
-                data: null,
-                orderable: false,
-                autoWidth: false,
-                defaultContent: '',
                 visible: _permissions.edit || _permissions.delete,
                 render: (data, type, row, meta) => {
                     if (!_permissions.edit && !_permissions.delete) {

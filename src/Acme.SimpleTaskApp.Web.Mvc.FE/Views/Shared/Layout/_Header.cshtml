@@ -1,4 +1,28 @@
-﻿<nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    @await Html.PartialAsync("_Header.LeftNavbar.cshtml")
-    @await Html.PartialAsync("_Header.RightNavbar.cshtml")
-</nav>
+﻿@using Acme.SimpleTaskApp.Web.Views.Shared.Components.RightNavbarLanguageSwitch
+@using Acme.SimpleTaskApp.Web.Views.Shared.Components.RightNavbarUserArea
+<header class="bg-white dark:bg-gray-900 shadow-sm">
+    <nav class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-8">
+                <a href="/" class="text-2xl font-bold text-green-600 dark:text-green-400">WheyShop</a>
+                <div class="hidden md:flex space-x-6">
+                    <a href="/" class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400">@L("HomePage")</a>
+                    <a href="/products" class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400">@L("Product")</a>
+                    <a href="/about" class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400">@L("About")</a>
+                    <a href="/cart" class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400">@L("Cart")</a>
+                    <a href="/orders" class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400">@L("Orders")</a>
+                    
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <ul class="navbar-nav ml-auto">
+                    @await Component.InvokeAsync(typeof(RightNavbarLanguageSwitchViewComponent))
+                </ul>
+                <ul class="navbar-nav ml-auto">
+
+                    @await Component.InvokeAsync(typeof(RightNavbarUserAreaViewComponent))
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

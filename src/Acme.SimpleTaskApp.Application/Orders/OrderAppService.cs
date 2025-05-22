@@ -7,6 +7,7 @@ using Abp.Domain.Repositories;
 using Abp.Linq.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Acme.SimpleTaskApp.Orders.Dto;
+using Acme.SimpleTaskApp.Products.Dto;
 
 namespace Acme.SimpleTaskApp.Orders
 {
@@ -48,7 +49,7 @@ namespace Acme.SimpleTaskApp.Orders
                 .WhereIf(input.UserId.HasValue, o => o.UserId == input.UserId.Value);
 
             var totalCount = await query.CountAsync();
-            
+
             var items = await query
                 .OrderByDescending(o => o.CreationTime)
                 .PageBy(input)
@@ -92,5 +93,26 @@ namespace Acme.SimpleTaskApp.Orders
 
             await _orderRepository.DeleteAsync(order);
         }
+
+        public async Task<List<ProductDto>> GetTopProductsByOrderQuantity(int count = 5)
+        {
+            var topProducts = await _orderItemRepository.GetAll()
+                .GroupBy(oi => new { oi.ProductId, oi.ProductName })
+                .Select(g => new
+                {
+                    ProductId = g.Key.ProductId,
+                    ProductName = g.Key.ProductName,
+                    TotalQuantity = g.Sum(oi => oi.Quantity)
+                })
+                .OrderByDescending(p => p.TotalQuantity)
+                .Take(count)
+                .ToListAsync();
+
+            return topProducts.Select(p => new ProductDto
+            {
+                Id = p.ProductId,
+                Name = p.ProductName
+            }).ToList();
+        }
     }
-} 
+}

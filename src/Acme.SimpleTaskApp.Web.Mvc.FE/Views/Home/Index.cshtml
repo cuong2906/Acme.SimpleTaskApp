@@ -1,418 +1,139 @@
-﻿@using Acme.SimpleTaskApp.Web.Startup
-@{
-    ViewBag.Title = L("HomePage");
-    ViewBag.CurrentPageName = PageNames.Home;
+﻿@{
+    ViewData["Title"] = "Trang chủ";
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
+
+<div class="flex flex-col">
+    <section class="w-full relative flex items-center justify-center min-h-[500px] py-12 md:py-24 lg:py-32" style="background-image: url('https://cdn-img.thethao247.vn/upload/thanhtung/2019/05/15/4-phuong-phap-luyen-tap-tang-co.jpg'); background-size: cover; background-position: center;">
+        <div class="absolute inset-0 bg-black/60"></div>
+        <div class="relative z-10 flex flex-col items-center justify-center text-center w-full px-4">
+            <h1 class="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none text-white">
+                Whey Protein Chất Lượng Cao
+            </h1>
+            <p class="max-w-[600px] text-white md:text-xl mt-4 mb-6">
+                Bổ sung protein chất lượng cao cho chế độ tập luyện của bạn. Sản phẩm whey protein tinh khiết, hỗ trợ phát triển cơ bắp và phục hồi.
+            </p>
+            <div class="flex flex-col gap-2 min-[400px]:flex-row justify-center">
+                <a href="/products">
+                    <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-lg">Xem sản phẩm</button>
+                </a>
+                <a href="/about">
+                    <button class="border border-gray-300 text-white hover:bg-white/10 px-4 py-2 rounded-lg text-lg">Tìm hiểu thêm</button>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Danh mục nổi bật -->
+    <section class="w-full py-8 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-center text-xl font-bold mb-6">DANH MỤC NỔI BẬT</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 justify-items-center">
+                <div class="flex flex-col items-center">
+                    <img src="https://wheystore.vn/images/category/whey-protein.png" alt="Whey Protein" class="w-20 h-20 mb-2" />
+                    <span class="font-semibold text-center">Whey Protein</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="https://wheystore.vn/images/category/mass-gainer.png" alt="Mass Gainer" class="w-20 h-20 mb-2" />
+                    <span class="font-semibold text-center">Mass Gainer</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="https://wheystore.vn/images/category/bcaa-eaa.png" alt="BCAA - EAA - Amino Acid" class="w-20 h-20 mb-2" />
+                    <span class="font-semibold text-center">BCAA - EAA - Amino Acid</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="https://wheystore.vn/images/category/vitamin.png" alt="Vitamin - D3&K2 - Dầu Cá" class="w-20 h-20 mb-2" />
+                    <span class="font-semibold text-center">Vitamin - D3&K2 - Dầu Cá</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="https://wheystore.vn/images/category/other.png" alt="Thực phẩm chức năng" class="w-20 h-20 mb-2" />
+                    <span class="font-semibold text-center">Thực phẩm chức năng</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sản phẩm bán chạy -->
+    <section class="w-full py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-center text-xl font-bold mb-2">SẢN PHẨM BÁN CHẠY</h2>
+            <p class="text-center text-sm text-gray-500 mb-8">Dựa vào số lượng sản phẩm được đặt mua nhiều nhất</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                @for (int i = 0; i < Model.TopProducts.Count; i++)
+                {
+                    var product = Model.TopProducts[i];
+                    <div class="bg-white rounded-lg shadow p-4 flex flex-col items-center relative">
+                        <span class="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">Top @(i + 1)</span>
+                        <img src="@product.ImageUrl" alt="@product.Name" class="w-24 h-24 object-contain mb-2" />
+                        <span class="text-xs text-gray-400 font-semibold mb-1">@product.NameCategory</span>
+                        <span class="font-bold text-center mb-1">@product.Name</span>
+                        <span class="text-red-600 font-bold text-lg">@product.Price.ToString("N0")đ</span>
+                        <span class="text-gray-400 line-through text-sm">@((product.Price * 1.1m).ToString("N0"))đ</span>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    <section class="w-full py-12 md:py-24 lg:py-32">
+        <div class="container px-4 md:px-6">
+            <div class="flex flex-col items-center justify-center space-y-4 text-center">
+                <div class="space-y-2">
+                    <h2 class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Tại sao chọn WheyShop?</h2>
+                    <p class="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                        Chúng tôi cung cấp các sản phẩm whey protein chất lượng cao, được nhập khẩu chính hãng với giá cả hợp lý.
+                    </p>
+                </div>
+            </div>
+            <div class="mx-auto grid max-w-5xl grid-cols-1 gap-6 py-12 md:grid-cols-3">
+                <!-- Card 1 -->
+                <div class="flex flex-col items-center space-y-2 rounded-lg border p-6 shadow-sm">
+                    <div class="rounded-full bg-green-100 p-3 dark:bg-green-900">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold">Chất lượng cao</h3>
+                    <p class="text-center text-muted-foreground">
+                        Sản phẩm được nhập khẩu chính hãng, đảm bảo chất lượng.
+                    </p>
+                </div>
+                <!-- Card 2 -->
+                <div class="flex flex-col items-center space-y-2 rounded-lg border p-6 shadow-sm">
+                    <div class="rounded-full bg-green-100 p-3 dark:bg-green-900">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold">Đảm bảo an toàn</h3>
+                    <p class="text-center text-muted-foreground">
+                        Tất cả sản phẩm đều được kiểm nghiệm và chứng nhận an toàn.
+                    </p>
+                </div>
+                <!-- Card 3 -->
+                <div class="flex flex-col items-center space-y-2 rounded-lg border p-6 shadow-sm">
+                    <div class="rounded-full bg-green-100 p-3 dark:bg-green-900">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M9.5 13.5 3 18V5l7 8" />
+                            <path d="m14 13.5 6.5 4.5V5l-7 8" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold">Giao hàng nhanh</h3>
+                    <p class="text-center text-muted-foreground">Giao hàng toàn quốc trong vòng 24-48 giờ.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
 
 @section scripts
 {
     <environment names="Development">
-        <script src="~/libs/chartjs/dist/Chart.js" asp-append-version="true"></script>
         <script src="~/view-resources/Views/Home/Index.js" asp-append-version="true"></script>
     </environment>
 
     <environment names="Staging,Production">
-        <script src="~/view-resources/Views/_Bundles/home-index.min.js" asp-append-version="true"></script>
+        <script src="~/view-resources/Views/Home/Index.min.js" asp-append-version="true"></script>
     </environment>
 }
-
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-12">
-                <h1 class="m-0 text-dark">@L("HomePage")</h1>
-            </div>
-        </div>
-    </div>
-</div>
-<section class="content">
-<div class="container-fluid">
-<div class="row">
-    <div class="col-12">
-        <div class="alert alert-info alert-dismissible">
-            <h6><i class="icon fa fa-info"></i> This is a sample Dashboard which doesn't show any server side data. However, you can develop your own dashboard inspired by this one and its source code.</h6>
-        </div>
-    </div>
-</div>
-<!-- Info boxes -->
-<div class="row">
-    <div class="col-12 col-sm-6 col-md-3">
-        <div class="info-box">
-            <span class="info-box-icon bg-info elevation-1">
-                <i class="fas fa-cog"></i>
-            </span>
-            <div class="info-box-content">
-                <span class="info-box-text">CPU Traffic</span>
-                <span class="info-box-number">
-                    10
-                    <small>%</small>
-                </span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-    </div>
-    <!-- /.col -->
-    <div class="col-12 col-sm-6 col-md-3">
-        <div class="info-box mb-3">
-            <span class="info-box-icon bg-danger elevation-1">
-                <i class="fas fa-thumbs-up"></i>
-            </span>
-            <div class="info-box-content">
-                <span class="info-box-text">Likes</span>
-                <span class="info-box-number">41,410</span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-    </div>
-    <!-- /.col -->
-    <!-- fix for small devices only -->
-    <div class="clearfix hidden-md-up"></div>
-    <div class="col-12 col-sm-6 col-md-3">
-        <div class="info-box mb-3">
-            <span class="info-box-icon bg-success elevation-1">
-                <i class="fas fa-shopping-cart"></i>
-            </span>
-            <div class="info-box-content">
-                <span class="info-box-text">Sales</span>
-                <span class="info-box-number">760</span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-    </div>
-    <!-- /.col -->
-    <div class="col-12 col-sm-6 col-md-3">
-        <div class="info-box mb-3">
-            <span class="info-box-icon bg-warning elevation-1">
-                <i class="fas fa-users"></i>
-            </span>
-            <div class="info-box-content">
-                <span class="info-box-text">New Members</span>
-                <span class="info-box-number">2,000</span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-    </div>
-    <!-- /.col -->
-</div>
-<!-- /.row -->
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title">Monthly Recap Report</h5>
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
-                            <i class="fas fa-wrench"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right" role="menu">
-                            <a href="#" class="dropdown-item">Action</a>
-                            <a href="#" class="dropdown-item">Another action</a>
-                            <a href="#" class="dropdown-item">Something else here</a>
-                            <a class="dropdown-divider"></a>
-                            <a href="#" class="dropdown-item">Separated link</a>
-                        </div>
-                    </div>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-8">
-                        <p class="text-center">
-                            <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
-                        </p>
-                        <div class="chart">
-                            <div class="chartjs-size-monitor">
-                                <div class="chartjs-size-monitor-expand">
-                                    <div class=""></div>
-                                </div>
-                                <div class="chartjs-size-monitor-shrink">
-                                    <div class=""></div>
-                                </div>
-                            </div>
-                            <!-- Sales Chart Canvas -->
-                            <canvas id="salesChart" height="360" style="height: 180px; display: block; width: 730px;" width="1460" class="chartjs-render-monitor"></canvas>
-                        </div>
-                        <!-- /.chart-responsive -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-md-4">
-                        <p class="text-center">
-                            <strong>Goal Completion</strong>
-                        </p>
-                        <div class="progress-group">
-                            Add Products to Cart
-                            <span class="float-right"><b>160</b>/200</span>
-                            <div class="progress progress-sm">
-                                <div class="progress-bar bg-primary" style="width: 80%"></div>
-                            </div>
-                        </div>
-                        <!-- /.progress-group -->
-                        <div class="progress-group">
-                            Complete Purchase
-                            <span class="float-right"><b>310</b>/400</span>
-                            <div class="progress progress-sm">
-                                <div class="progress-bar bg-danger" style="width: 75%"></div>
-                            </div>
-                        </div>
-                        <!-- /.progress-group -->
-                        <div class="progress-group">
-                            <span class="progress-text">Visit Premium Page</span>
-                            <span class="float-right"><b>480</b>/800</span>
-                            <div class="progress progress-sm">
-                                <div class="progress-bar bg-success" style="width: 60%"></div>
-                            </div>
-                        </div>
-                        <!-- /.progress-group -->
-                        <div class="progress-group">
-                            Send Inquiries
-                            <span class="float-right"><b>250</b>/500</span>
-                            <div class="progress progress-sm">
-                                <div class="progress-bar bg-warning" style="width: 50%"></div>
-                            </div>
-                        </div>
-                        <!-- /.progress-group -->
-                    </div>
-                    <!-- /.col -->
-                </div>
-                <!-- /.row -->
-            </div>
-            <!-- ./card-body -->
-            <div class="card-footer">
-                <div class="row">
-                    <div class="col-sm-3 col-6">
-                        <div class="description-block border-right">
-                            <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 17%</span>
-                            <h5 class="description-header">$35,210.43</h5>
-                            <span class="description-text">TOTAL REVENUE</span>
-                        </div>
-                        <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-3 col-6">
-                        <div class="description-block border-right">
-                            <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 0%</span>
-                            <h5 class="description-header">$10,390.90</h5>
-                            <span class="description-text">TOTAL COST</span>
-                        </div>
-                        <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-3 col-6">
-                        <div class="description-block border-right">
-                            <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span>
-                            <h5 class="description-header">$24,813.53</h5>
-                            <span class="description-text">TOTAL PROFIT</span>
-                        </div>
-                        <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-3 col-6">
-                        <div class="description-block">
-                            <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> 18%</span>
-                            <h5 class="description-header">1200</h5>
-                            <span class="description-text">GOAL COMPLETIONS</span>
-                        </div>
-                        <!-- /.description-block -->
-                    </div>
-                </div>
-                <!-- /.row -->
-            </div>
-            <!-- /.card-footer -->
-        </div>
-        <!-- /.card -->
-    </div>
-    <!-- /.col -->
-</div>
-<!-- /.row -->
-<!-- Main row -->
-<div class="row">
-    <!-- Left col -->
-    <div class="col-md-8">
-        <!-- TABLE: LATEST ORDERS -->
-        <div class="card">
-            <div class="card-header border-transparent">
-                <h3 class="card-title">Latest Orders</h3>
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table m-0">
-                        <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Item</th>
-                            <th>Status</th>
-                            <th>Popularity</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>
-                                <a href="javascript:;">OR9842</a>
-                            </td>
-                            <td>Call of Duty IV</td>
-                            <td>
-                                <span class="badge badge-success">Shipped</span>
-                            </td>
-                            <td>
-                                <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="javascript:;">OR1848</a>
-                            </td>
-                            <td>Samsung Smart TV</td>
-                            <td>
-                                <span class="badge badge-warning">Pending</span>
-                            </td>
-                            <td>
-                                <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="javascript:;">OR7429</a>
-                            </td>
-                            <td>iPhone 6 Plus</td>
-                            <td>
-                                <span class="badge badge-danger">Delivered</span>
-                            </td>
-                            <td>
-                                <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="javascript:;">OR7429</a>
-                            </td>
-                            <td>Samsung Smart TV</td>
-                            <td>
-                                <span class="badge badge-info">Processing</span>
-                            </td>
-                            <td>
-                                <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="javascript:;">OR1848</a>
-                            </td>
-                            <td>Samsung Smart TV</td>
-                            <td>
-                                <span class="badge badge-warning">Pending</span>
-                            </td>
-                            <td>
-                                <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="javascript:;">OR7429</a>
-                            </td>
-                            <td>iPhone 6 Plus</td>
-                            <td>
-                                <span class="badge badge-danger">Delivered</span>
-                            </td>
-                            <td>
-                                <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="javascript:;">OR9842</a>
-                            </td>
-                            <td>Call of Duty IV</td>
-                            <td>
-                                <span class="badge badge-success">Shipped</span>
-                            </td>
-                            <td>
-                                <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- /.table-responsive -->
-            </div>
-            <!-- /.card-body -->
-            <div class="card-footer clearfix">
-                <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
-                <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
-            </div>
-            <!-- /.card-footer -->
-        </div>
-        <!-- /.card -->
-    </div>
-    <!-- /.col -->
-    <div class="col-md-4">
-        <!-- Info Boxes Style 2 -->
-        <div class="info-box mb-3 bg-warning">
-            <span class="info-box-icon">
-                <i class="fas fa-tag"></i>
-            </span>
-            <div class="info-box-content">
-                <span class="info-box-text">Inventory</span>
-                <span class="info-box-number">5,200</span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-        <div class="info-box mb-3 bg-success">
-            <span class="info-box-icon">
-                <i class="fas fa-heart"></i>
-            </span>
-            <div class="info-box-content">
-                <span class="info-box-text">Mentions</span>
-                <span class="info-box-number">92,050</span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-        <div class="info-box mb-3 bg-danger">
-            <span class="info-box-icon">
-                <i class="fas fa-cloud-download-alt"></i>
-            </span>
-            <div class="info-box-content">
-                <span class="info-box-text">Downloads</span>
-                <span class="info-box-number">114,381</span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-        <div class="info-box mb-3 bg-info">
-            <span class="info-box-icon">
-                <i class="fas fa-comment"></i>
-            </span>
-            <div class="info-box-content">
-                <span class="info-box-text">Direct Messages</span>
-                <span class="info-box-number">163,921</span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
-    </div>
-    <!-- /.col -->
-</div>
-<!-- /.row -->
-</div>
-</section>

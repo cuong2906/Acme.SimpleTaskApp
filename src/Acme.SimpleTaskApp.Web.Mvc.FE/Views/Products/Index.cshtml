@@ -1,16 +1,15 @@
-﻿    @using Acme.SimpleTaskApp.Authorization
-    @model Acme.SimpleTaskApp.Web.Models.Products.IndexViewModel
-    @inject Abp.Authorization.IPermissionChecker PermissionChecker
+﻿@using Acme.SimpleTaskApp.Authorization
+@using Acme.SimpleTaskApp.Products.Dto
+@model Acme.SimpleTaskApp.Web.Models.Products.IndexViewModel
 
 @{
-    ViewBag.Title = L("Products");
+    ViewData["Title"] = L("Products");
     ViewBag.ActiveMenu = "Products";
-    var canCreate = await PermissionChecker.IsGrantedAsync(PermissionNames.Pages_Products_Create);
-    var canEdit = await PermissionChecker.IsGrantedAsync(PermissionNames.Pages_Products_Edit);
+    var pageSize = 9; // Default page size
 }
 
 @section scripts
-    {
+{
     <environment names="Development">
         <script src="~/view-resources/Views/Products/Index.js" asp-append-version="true"></script>
     </environment>
@@ -18,83 +17,70 @@
     <environment names="Staging,Production">
         <script src="~/view-resources/Views/Products/Index.min.js" asp-append-version="true"></script>
     </environment>
+}
 
-    }
+<div class="container mx-auto px-4 py-8">
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold mb-6">@L("Products")</h1>
 
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-6">
-                <h1>@L("Product")</h1>
-            </div>
-            <div class="col-sm-6">
-                @if (canCreate)
-                {
-                    <button class=" btn bg-blue float-sm-right" data-toggle="modal" data-target="#createModal">
-                        <i class="fa fa-plus-square"></i>
-                        @L("Create")
-                    </button>
-                }
-            </div>
-        </div>
-    </div>
-</section>
+        <!-- Search and Filter Form -->
+        <form id="searchForm" class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Search -->
+                <div>
+                    <label for="keyword" class="block text-sm font-medium text-gray-700 mb-1">@L("Search")</label>
+                    <input type="text" id="keyword" name="keyword" value="@Model.CurrentKeyword"
+                           class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                           placeholder="@L("SearchProducts")">
+                </div>
 
-<section>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <!--Use for bulk actions-->
-                            </div>
-                            <div class="col-md-6">
-                                @await Html.PartialAsync("~/Views/Products/Index.AdvancedSearch.cshtml")
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="ProductsTable" class="table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>@L("Name")</th>
-                                        <th>@L("Price")</th>
-                                        <th>@L("ImageUrl")</th>
-                                        <th>@L("CategoriesName")</th>
-                                        <th>@L("CreationTime")</th>
-                                        <th>@L("UpdateTime")</th>
-                                        <th>@L("AddToCart")</th>
-                                        @if (canEdit)
-                                        {
-                                            <th style="width: 150px">@L("Actions")</th>
-                                        }
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div>
-                    </div>
+                <!-- Category Filter -->
+                <div>
+                    <label for="categoryId" class="block text-sm font-medium text-gray-700 mb-1">@L("Category")</label>
+                    <select id="categoryId" name="categoryId"
+                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                        <option value="">@L("AllCategories")</option>
+                        @foreach (var category in Model.Categories)
+                        {
+                            var isSelected = category.Value == Model.CurrentCategoryId?.ToString();
+                            <option value="@category.Value" selected="@isSelected">@category.Text</option>
+                        }
+                    </select>
+                </div>
+
+                <!-- Price Range -->
+                <div>
+                    <label for="minPrice" class="block text-sm font-medium text-gray-700 mb-1">@L("MinPrice")</label>
+                    <input type="number" id="minPrice" name="minPrice" value="@Model.CurrentMinPrice"
+                           class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                           min="0" step="0.01">
+                </div>
+
+                <div>
+                    <label for="maxPrice" class="block text-sm font-medium text-gray-700 mb-1">@L("MaxPrice")</label>
+                    <input type="number" id="maxPrice" name="maxPrice" value="@Model.CurrentMaxPrice"
+                           class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                           min="0" step="0.01">
                 </div>
             </div>
-        </div>
-    </div>
-</section>
 
-@if (canCreate)
-{
-    @await Html.PartialAsync("~/Views/Products/_CreateModal.cshtml", Model)
-}
-
-@if (canEdit)
-{
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel " data-backdrop="static">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
+            <div class="mt-4 flex justify-end space-x-4">
+                <button type="button" id="resetFilters" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+                    @L("Reset")
+                </button>
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                    @L("Search")
+                </button>
             </div>
+        </form>
+
+        <!-- Products Grid -->
+        <div id="productsContainer">
+            @await Html.PartialAsync("_ProductList", new Abp.Application.Services.Dto.PagedResultDto<Acme.SimpleTaskApp.Products.Dto.ProductDto>
+            {
+                Items = Model.Products,
+                TotalCount = Model.TotalCount
+            })
         </div>
     </div>
-}
+</div>

@@ -19,7 +19,7 @@ namespace Acme.SimpleTaskApp.Web.Controllers
         public async Task<ActionResult> Index()
         {
             var orders = await _orderAppService.GetAllOrders(new PagedOrderResultRequestDto());
-            var model = new IndexViewModel(orders.Items);
+            var model = new OrdersViewModel(orders.Items);
             return View(model);
         }
 
@@ -37,7 +37,7 @@ namespace Acme.SimpleTaskApp.Web.Controllers
                 return NotFound();
             }
 
-            var model = new IndexViewModel
+            var model = new OrdersViewModel
             {
                 Order = order
             };
@@ -45,4 +45,4 @@ namespace Acme.SimpleTaskApp.Web.Controllers
             return PartialView("_EditModal", model);
         }
     }
-} 
+}

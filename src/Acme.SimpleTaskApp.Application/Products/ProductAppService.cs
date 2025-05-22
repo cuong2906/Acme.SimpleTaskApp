@@ -16,6 +16,7 @@ using AutoMapper.Internal.Mappers;
 using Acme.SimpleTaskApp.Entities.Products;
 using Abp;
 using Abp.UI;
+using System.Collections.Generic;
 
 namespace Acme.SimpleTaskApp.Products
 {
@@ -56,13 +57,13 @@ namespace Acme.SimpleTaskApp.Products
         [AbpAuthorize]
         public async Task<PagedResultDto<ProductDto>> GetProductPaged(PagedProductDto input)
         {
-            var products = _productRepository.GetAllIncluding(p => p.Category).AsNoTracking();
+            var query = _productRepository.GetAllIncluding(p => p.Category).AsNoTracking();
 
             // Lọc theo từ khóa
             if (!string.IsNullOrWhiteSpace(input.Keyword))
             {
                 var keyword = input.Keyword.ToLower().Trim();
-                products = products.Where(p =>
+                query = query.Where(p =>
                     p.Name.ToLower().Contains(keyword) ||
                     p.Price.ToString().Contains(keyword) ||
                     p.Category.NameCategory.ToLower().Contains(keyword)
@@ -72,48 +73,52 @@ namespace Acme.SimpleTaskApp.Products
             // Lọc theo khoảng giá
             if (input.MinPrice.HasValue)
             {
-                products = products.Where(p => p.Price >= input.MinPrice.Value);
+                query = query.Where(p => p.Price >= input.MinPrice.Value);
             }
 
             if (input.MaxPrice.HasValue)
             {
-                products = products.Where(p => p.Price <= input.MaxPrice.Value);
+                query = query.Where(p => p.Price <= input.MaxPrice.Value);
             }
 
             // Lọc theo danh mục
             if (input.CategoryId.HasValue && input.CategoryId.Value > 0)
             {
-                products = products.Where(p => p.CategoryId == input.CategoryId.Value);
+                query = query.Where(p => p.CategoryId == input.CategoryId.Value);
             }
 
             // Tính tổng số lượng sản phẩm sau khi lọc
-            var count = await products.CountAsync();
+            var totalCount = await query.CountAsync();
 
             // Lọc theo sắp xếp nếu có
             if (!string.IsNullOrWhiteSpace(input.Sorting))
             {
-                products = products.OrderBy(input.Sorting);
+                query = query.OrderBy(input.Sorting);
+            }
+            else
+            {
+                // Mặc định sắp xếp theo thời gian tạo giảm dần
+                query = query.OrderByDescending(p => p.CreationTime);
             }
 
             // Lấy kết quả phân trang
-            var items = await products.PageBy(input).ToListAsync();
+            var items = await query
+                .Skip(input.SkipCount)
+                .Take(input.MaxResultCount)
+                .ToListAsync();
 
             // Chuyển kết quả thành danh sách ProductDto
-            var result = items.Select(p => new ProductDto
+            var dtos = ObjectMapper.Map<List<ProductDto>>(items);
+
+            // Thêm thông tin danh mục cho mỗi sản phẩm
+            foreach (var dto in dtos)
             {
-                Id = p.Id,
-                Name = p.Name,
-                Price = p.Price,
-                ImageUrl = p.ImageUrl,
-                CategoryId = p.CategoryId ?? 0,
-                NameCategory = p.Category != null ? p.Category.NameCategory : "",
-                Quantity = p.Quantity,
-                CreationTime = p.CreationTime,
-                LastModificationTime = p.LastModificationTime
-            }).ToList();
+                var product = items.First(p => p.Id == dto.Id);
+                dto.NameCategory = product.Category?.NameCategory ?? "";
+            }
 
             // Trả về kết quả phân trang
-            return new PagedResultDto<ProductDto>(count, result);
+            return new PagedResultDto<ProductDto>(totalCount, dtos);
         }
 
         [AbpAuthorize(PermissionNames.Pages_Products_Edit)]

@@ -1,7 +1,44 @@
 ﻿@using Acme.SimpleTaskApp
-<footer class="main-footer">
-    <strong>Copyright &copy; @DateTime.Now.Year <a href="javascript:void(0);">SimpleTaskApp</a>.</strong> All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-        <b>@L("Version")</b> @AppVersionHelper.Version [@AppVersionHelper.ReleaseDate.ToString("yyyyMMdd")]
+<footer class="bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">WheyShop</h3>
+                <p class="text-gray-600 dark:text-gray-300">Cung cấp sản phẩm whey protein chất lượng cao, chính hãng với giá cả hợp lý.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Liên kết nhanh</h3>
+                <ul class="space-y-2">
+                    <li><a href="/" class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400">@L("HomePage")</a></li>
+                    <li><a href="/products" class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400">@L("Product")</a></li>
+                    <li><a href="/about" class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400">@L("About")</a></li>
+                    <li><a href="/cart" class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400">@L("Cart")</a></li>
+                    <li><a href="/orders" class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400">@L("Orders")</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Hỗ trợ</h3>
+                <ul class="space-y-2">
+                    <li><a href="/faq" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400">Câu hỏi thường gặp</a></li>
+                    <li><a href="/shipping" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400">Chính sách vận chuyển</a></li>
+                    <li><a href="/returns" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400">Chính sách đổi trả</a></li>
+                    <li><a href="/privacy" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400">Chính sách bảo mật</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Liên hệ</h3>
+                <ul class="space-y-2">
+                    <li class="text-gray-600 dark:text-gray-300">Email: huucuong773@wheyshop.com</li>
+                    <li class="text-gray-600 dark:text-gray-300">Điện thoại: (+84) 388397697</li>
+                    <li class="text-gray-600 dark:text-gray-300">Địa chỉ: Sơn Đồng-Hoài Đức-Hà Nội</li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-gray-200 dark:border-gray-700 mt-8 pt-8 text-center">
+            <p class="text-gray-600 dark:text-gray-300">
+                &copy; @DateTime.Now.Year WheyShop. All rights reserved.
+                <span class="text-sm">Version @AppVersionHelper.Version [@AppVersionHelper.ReleaseDate.ToString("yyyyMMdd")]</span>
+            </p>
+        </div>
     </div>
 </footer>
